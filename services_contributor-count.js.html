@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/steam/steam-base.js</title>
+    <title>JSDoc: Source: services/contributor-count.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/steam/steam-base.js</h1>
+    <h1 class="page-title">Source: services/contributor-count.js</h1>
 
     
 
@@ -27,61 +27,48 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
+ * Common functions and utilities for tasks related to contributor count.
+ *
  * @module
  */
 
-import { BaseJsonService } from '../index.js'
+import { metric } from './text-formatters.js'
 
 /**
- * The steam api is based like /{interface}/{method}/v{version}/
+ * Determines the color used for a badge based on the contributor count.
+ * The color varies from red to bright green as the contributor count increases.
  *
- * @see https://partner.steamgames.com/doc/webapi_overview#2
+ * @param {number} contributorCount Contributor count
+ * @returns {string} Badge color
  */
-class BaseSteamAPI extends BaseJsonService {
-  /**
-   * Steam API Interface
-   *
-   * @see https://partner.steamgames.com/doc/webapi_overview#2
-   */
-  static get interf() {
-    throw new Error(`interf() was not implement for ${this.name}`)
-  }
-
-  /**
-   * Steam API Method
-   *
-   * @see https://partner.steamgames.com/doc/webapi_overview#2
-   */
-  static get method() {
-    throw new Error(`method() was not implement for ${this.name}`)
-  }
-
-  /**
-   * Steam API Version
-   *
-   * @see https://partner.steamgames.com/doc/webapi_overview#2
-   */
-  static get version() {
-    throw new Error(`version() was not implement for ${this.name}`)
-  }
-
-  async fetch({ schema, options }) {
-    const interf = this.constructor.interf
-    const method = this.constructor.method
-    const version = this.constructor.version
-    const url = `https://api.steampowered.com/${interf}/${method}/v${version}/?format=json`
-    return this._requestJson({
-      url,
-      schema,
-      errorMessages: {
-        400: 'bad request',
-      },
-      options,
-    })
+function contributorColor(contributorCount) {
+  if (contributorCount > 2) {
+    return 'brightgreen'
+  } else if (contributorCount === 2) {
+    return 'yellow'
+  } else {
+    return 'red'
   }
 }
 
-export default BaseSteamAPI
+/**
+ * Handles rendering concerns of badges that display contributor count.
+ * Determines the message and color of the badge according to the contributor count.
+ *
+ * @param {object} attrs Refer to individual attributes
+ * @param {string} [attrs.label] If provided then badge label is set to this value
+ * @param {number} attrs.contributorCount Contributor count
+ * @returns {object} Badge with label, message and color properties
+ */
+function renderContributorBadge({ label, contributorCount }) {
+  return {
+    label,
+    message: metric(contributorCount),
+    color: contributorColor(contributorCount),
+  }
+}
+
+export { contributorColor, renderContributorBadge }
 </code></pre>
         </article>
     </section>

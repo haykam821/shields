@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/steam/steam-base.js</title>
+    <title>JSDoc: Module: services/contributor-count</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,74 +17,548 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/steam/steam-base.js</h1>
+    <h1 class="page-title">Module: services/contributor-count</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @module
- */
+        
+            
+        
+    
+</header>
 
-import { BaseJsonService } from '../index.js'
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Common functions and utilities for tasks related to contributor count.</p></div>
+        
 
-/**
- * The steam api is based like /{interface}/{method}/v{version}/
- *
- * @see https://partner.steamgames.com/doc/webapi_overview#2
- */
-class BaseSteamAPI extends BaseJsonService {
-  /**
-   * Steam API Interface
-   *
-   * @see https://partner.steamgames.com/doc/webapi_overview#2
-   */
-  static get interf() {
-    throw new Error(`interf() was not implement for ${this.name}`)
-  }
+        
+            
 
-  /**
-   * Steam API Method
-   *
-   * @see https://partner.steamgames.com/doc/webapi_overview#2
-   */
-  static get method() {
-    throw new Error(`method() was not implement for ${this.name}`)
-  }
 
-  /**
-   * Steam API Version
-   *
-   * @see https://partner.steamgames.com/doc/webapi_overview#2
-   */
-  static get version() {
-    throw new Error(`version() was not implement for ${this.name}`)
-  }
 
-  async fetch({ schema, options }) {
-    const interf = this.constructor.interf
-    const method = this.constructor.method
-    const version = this.constructor.version
-    const url = `https://api.steampowered.com/${interf}/${method}/v${version}/?format=json`
-    return this._requestJson({
-      url,
-      schema,
-      errorMessages: {
-        400: 'bad request',
-      },
-      options,
-    })
-  }
-}
 
-export default BaseSteamAPI
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_contributor-count.js.html">services/contributor-count.js</a>, <a href="services_contributor-count.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~contributorColor"><span class="type-signature">(inner) </span>contributorColor<span class="signature">(contributorCount)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Determines the color used for a badge based on the contributor count.
+The color varies from red to bright green as the contributor count increases.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>contributorCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Contributor count</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_contributor-count.js.html">services/contributor-count.js</a>, <a href="services_contributor-count.js.html#line16">line 16</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Badge color</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~renderContributorBadge"><span class="type-signature">(inner) </span>renderContributorBadge<span class="signature">(attrs)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Handles rendering concerns of badges that display contributor count.
+Determines the message and color of the badge according to the contributor count.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>attrs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Refer to individual attributes</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>If provided then badge label is set to this value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contributorCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Contributor count</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_contributor-count.js.html">services/contributor-count.js</a>, <a href="services_contributor-count.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Badge with label, message and color properties</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
