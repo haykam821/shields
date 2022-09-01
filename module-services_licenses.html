@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: services/contributor-count</title>
+    <title>JSDoc: Module: services/licenses</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: services/contributor-count</h1>
+    <h1 class="page-title">Module: services/licenses</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Common functions and utilities for tasks related to contributor count.</p></div>
+            <div class="description"><p>Common functions and utilities for tasks related to license badges.</p></div>
         
 
         
@@ -87,7 +87,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_contributor-count.js.html">services/contributor-count.js</a>, <a href="services_contributor-count.js.html#line1">line 1</a>
+        <a href="services_licenses.js.html">services/licenses.js</a>, <a href="services_licenses.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -134,6 +134,82 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~licenseToColorMap"><span class="type-signature">(inner, constant) </span>licenseToColorMap<span class="type-signature"> :object</span></h4>
+
+
+
+
+<div class="description">
+    <p>Mapping of licenses to their corresponding color and priority.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_licenses.js.html">services/licenses.js</a>, <a href="services_licenses.js.html#line102">line 102</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -144,7 +220,7 @@
     
 
     
-    <h4 class="name" id="~contributorColor"><span class="type-signature">(inner) </span>contributorColor<span class="signature">(contributorCount)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="~licenseToColor"><span class="type-signature">(inner) </span>licenseToColor<span class="signature">(licenses)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -152,8 +228,7 @@
 
 
 <div class="description">
-    <p>Determines the color used for a badge based on the contributor count.
-The color varies from red to bright green as the contributor count increases.</p>
+    <p>Maps the license to its corresponding color and priority and sorts the list of mapped licenses by priority.</p>
 </div>
 
 
@@ -189,13 +264,16 @@ The color varies from red to bright green as the contributor count increases.</p
 
         <tr>
             
-                <td class="name"><code>contributorCount</code></td>
+                <td class="name"><code>licenses</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
 
 
             
@@ -205,7 +283,7 @@ The color varies from red to bright green as the contributor count increases.</p
 
             
 
-            <td class="description last"><p>Contributor count</p></td>
+            <td class="description last"><p>License or list of licenses</p></td>
         </tr>
 
     
@@ -246,7 +324,7 @@ The color varies from red to bright green as the contributor count increases.</p
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_contributor-count.js.html">services/contributor-count.js</a>, <a href="services_contributor-count.js.html#line16">line 16</a>
+        <a href="services_licenses.js.html">services/licenses.js</a>, <a href="services_licenses.js.html#line119">line 119</a>
     </li></ul></dd>
     
 
@@ -275,7 +353,7 @@ The color varies from red to bright green as the contributor count increases.</p
 
         
 <div class="param-desc">
-    <p>Badge color</p>
+    <p>Color corresponding to the license or the list of licenses</p>
 </div>
 
 
@@ -304,7 +382,7 @@ The color varies from red to bright green as the contributor count increases.</p
     
 
     
-    <h4 class="name" id="~renderContributorBadge"><span class="type-signature">(inner) </span>renderContributorBadge<span class="signature">(attrs)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="~renderLicenseBadge"><span class="type-signature">(inner) </span>renderLicenseBadge<span class="signature">(attrs)</span><span class="type-signature"> &rarr; {object}</span></h4>
     
 
     
@@ -312,8 +390,9 @@ The color varies from red to bright green as the contributor count increases.</p
 
 
 <div class="description">
-    <p>Handles rendering concerns of badges that display contributor count.
-Determines the message and color of the badge according to the contributor count.</p>
+    <p>Handles rendering concerns of license badges.
+Determines the message of the badge by joining the licenses in a comma-separated format.
+Sets the badge color to the provided value, if not provided then the color is used from licenseToColorMap.</p>
 </div>
 
 
@@ -393,7 +472,7 @@ Determines the message and color of the badge according to the contributor count
 
         <tr>
             
-                <td class="name"><code>label</code></td>
+                <td class="name"><code>license</code></td>
             
 
             <td class="type">
@@ -419,20 +498,20 @@ Determines the message and color of the badge according to the contributor count
 
             
 
-            <td class="description last"><p>If provided then badge label is set to this value</p></td>
+            <td class="description last"><p>License to render, required if badge contains only one license</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>contributorCount</code></td>
+                <td class="name"><code>licenses</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Array.&lt;string></span>
 
 
             
@@ -440,6 +519,8 @@ Determines the message and color of the badge according to the contributor count
 
             
                 <td class="attributes">
+                
+                    &lt;optional><br>
                 
 
                 
@@ -450,7 +531,40 @@ Determines the message and color of the badge according to the contributor count
 
             
 
-            <td class="description last"><p>Contributor count</p></td>
+            <td class="description last"><p>List of licenses to render, required if badge contains multiple licenses</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>If provided then the badge will use this color value</p></td>
         </tr>
 
     
@@ -498,7 +612,7 @@ Determines the message and color of the badge according to the contributor count
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_contributor-count.js.html">services/contributor-count.js</a>, <a href="services_contributor-count.js.html#line35">line 35</a>
+        <a href="services_licenses.js.html">services/licenses.js</a>, <a href="services_licenses.js.html#line144">line 144</a>
     </li></ul></dd>
     
 
@@ -527,7 +641,7 @@ Determines the message and color of the badge according to the contributor count
 
         
 <div class="param-desc">
-    <p>Badge with label, message and color properties</p>
+    <p>Badge with message and color properties</p>
 </div>
 
 
